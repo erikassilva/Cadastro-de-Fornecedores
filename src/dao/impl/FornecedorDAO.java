@@ -218,6 +218,7 @@ public class FornecedorDAO implements IDAO {
 	}
 
 	private void salvarServicos(Fornecedor fornecedor) throws SQLException {
+		
 		PreparedStatement pst = null;
 		
 		StringBuilder sql = new StringBuilder();
@@ -249,7 +250,7 @@ public class FornecedorDAO implements IDAO {
 		PreparedStatement pst = null;
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO tb_os(dt_inicio, for_id, ");
+		sql.append("INSERT INTO tb_os(dt_inicio, os_for_id, ");
 		sql.append("dt_cadastro) VALUES (?,?,?)");
 
 		for (Os o : fornecedor.getOrdemServicos()) {
@@ -280,8 +281,8 @@ public class FornecedorDAO implements IDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO tb_contato(email, departamento, ");
-		sql.append("telefone, dt_cadastro) ");
-		sql.append(" VALUES (?, ?, ?, ?)");	
+		sql.append("dt_cadastro) ");
+		sql.append(" VALUES (?, ?, ?)");	
 
 		for (Contato c : fornecedor.getContatos()) {
 			
@@ -289,11 +290,10 @@ public class FornecedorDAO implements IDAO {
 					Statement.RETURN_GENERATED_KEYS);
 
 			pst.setString(1, c.getEmail());
-			pst.setString(2, c.getDepartamento().getDescricao());
-			pst.setString(3, c.getTelefone().getDdd());			
+			pst.setString(2, c.getDepartamento().getDescricao());			
 			
 			Timestamp time = new Timestamp(c.getDtCadastro().getTime());
-			pst.setTimestamp(4, time);
+			pst.setTimestamp(3, time);
 			
 			pst.executeUpdate();
 

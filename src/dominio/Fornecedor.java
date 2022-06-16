@@ -25,9 +25,9 @@ public class Fornecedor extends EntidadeDominio {
 	private List<Cnae> cnaes;
 	private List<Contato> contatos;
 	
-	public Fornecedor(String email, String cnpj, String inscricaoEstadual,
-			String inscricaoMunicipal, String rzSocial, String nmFantasia, String status, String tipoFornecimento,
-			Endereco endereco) {
+	
+	public Fornecedor(String email, String cnpj, String inscricaoEstadual, String inscricaoMunicipal,
+			String rzSocial, String nmFantasia, String status, String tipoFornecimento, Endereco endereco) {
 		super();
 		this.email = email;
 		this.cnpj = cnpj;
@@ -38,14 +38,8 @@ public class Fornecedor extends EntidadeDominio {
 		this.status = status;
 		this.tipoFornecimento = tipoFornecimento;
 		this.endereco = endereco;
-		this.ordemServicos = ordemServicos;
-		this.servicos = servicos;
-		this.produtos = produtos;
-		this.contasBancarias = contasBancarias;
-		this.telefones = telefones;
-		this.cnaes = cnaes;
-		this.contatos = contatos;
 	}
+	
 	public boolean isRascunho() {
 		return isRascunho;
 	}

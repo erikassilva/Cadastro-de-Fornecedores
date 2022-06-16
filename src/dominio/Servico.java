@@ -6,11 +6,9 @@ public class Servico extends EntidadeDominio {
 	private String descricao;
 	private Os os;
 	
-	public Servico(int id, String descricao, Os os) {
+	public Servico(String descricao) {
 		super();
-		this.id = id;
 		this.descricao = descricao;
-		this.os = os;
 	}
 
 	public int getId() {

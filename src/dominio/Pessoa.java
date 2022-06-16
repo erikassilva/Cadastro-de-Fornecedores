@@ -7,10 +7,9 @@ public class Pessoa extends EntidadeDominio {
 	private String nome;
 	private List<Usuario> usuarios;
 	
-	public Pessoa(String nome, List<Usuario> usuarios) {
+	public Pessoa(String nome) {
 		super();
 		this.nome = nome;
-		this.usuarios = usuarios;
 	}
 
 	public String getNome() {

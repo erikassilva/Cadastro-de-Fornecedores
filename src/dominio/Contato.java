@@ -8,11 +8,10 @@ public class Contato extends Pessoa {
 	private Departamento departamento;
 	private Telefone telefone;
 	
-	public Contato(String nome, List<Usuario> usuarios, String email, Departamento departamento, Telefone telefone) {
-		super(nome, usuarios);
+	public Contato(String nome, String email, Departamento departamento) {
+		super(nome);
 		this.email = email;
 		this.departamento = departamento;
-		this.telefone = telefone;
 	}
 
 	public String getEmail() {

@@ -8,11 +8,9 @@ public class Os extends EntidadeDominio {
 	private Fornecedor fornecedor;
 	private List <Servico> servicos;
 	
-	public Os(long dtInicio, Fornecedor fornecedor, List<Servico> servicos) {
+	public Os(long dtInicio) {
 		super();
 		this.dtInicio = dtInicio;
-		this.fornecedor = fornecedor;
-		this.servicos = servicos;
 	}
 
 	public long getDtInicio() {

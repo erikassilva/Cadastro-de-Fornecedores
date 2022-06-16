@@ -6,9 +6,8 @@ public class Produto extends EntidadeDominio {
 	private String nome;
 	private String descricao;
 	
-	public Produto(int id, String nome, String descricao) {
+	public Produto( String nome, String descricao) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 	}
