@@ -228,8 +228,11 @@ public class FornecedorDAO implements IDAO {
 		
 		for (Servico s : fornecedor.getServicos()) {
 			
-			pst.setString(1, s.getDescricao());		
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
 			
+			pst.setString(1, s.getDescricao());		
+						
 			Timestamp time = new Timestamp(s.getDtCadastro().getTime());
 			pst.setTimestamp(2, time);
 			

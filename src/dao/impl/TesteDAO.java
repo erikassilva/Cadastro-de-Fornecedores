@@ -56,8 +56,9 @@ public class TesteDAO {
         
         Os os1 = new Os(1/1/2022);
         Produto pro1 = new Produto("parafuso", "3 pinos");
-        Servico ser1 = new Servico("assistencia");             		
-               
+        Servico ser1 = new Servico("assistencia");
+        ser1.setDtCadastro(new Date());
+        
 		Fornecedor erika = new Fornecedor("@asd", "1000", "12345678996", "123456", "afasda", "asdasfd", "asda", "123", endereco);			
 		erika.setDtCadastro(new Date());
 		
