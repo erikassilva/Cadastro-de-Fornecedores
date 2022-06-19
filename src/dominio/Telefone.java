@@ -6,12 +6,13 @@ public class Telefone extends EntidadeDominio {
 	private String numero;
 	private String ddi;
 	private TipoTelefone tipoTelefone;
-	
-	public Telefone(String ddd, String numero, String ddi) {
+		
+	public Telefone(String ddd, String numero, String ddi, TipoTelefone tipoTelefone) {
 		super();
 		this.ddd = ddd;
 		this.numero = numero;
 		this.ddi = ddi;
+		this.tipoTelefone = tipoTelefone;
 	}
 
 	public String getDdd() {

@@ -126,7 +126,7 @@ public class FornecedorDAO implements IDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO tb_telefone(ddd, ddi, ");
-		sql.append("numero, tipoTelefone, dt_cadastro) ");
+		sql.append("numero, tipo_telefone, dt_cadastro) ");
 		sql.append(" VALUES (?, ?, ?, ?, ?)");	
 	
 		for (Telefone t : fornecedor.getTelefones()) {
