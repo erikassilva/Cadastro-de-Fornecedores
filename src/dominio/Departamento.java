@@ -8,6 +8,10 @@ public class Departamento extends EntidadeDominio {
 		super();
 		this.descricao = descricao;
 	}
+	
+	public Departamento() {
+		super();
+	}
 
 	public String getDescricao() {
 		return descricao;

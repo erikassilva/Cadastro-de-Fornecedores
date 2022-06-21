@@ -10,7 +10,11 @@ public class TipoLogradouro {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
-	
+			
+	public TipoLogradouro() {
+		super();
+	}
+
 	public String getNome() {
 		return nome;
 	}

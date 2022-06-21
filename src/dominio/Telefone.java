@@ -14,6 +14,10 @@ public class Telefone extends EntidadeDominio {
 		this.ddi = ddi;
 		this.tipoTelefone = tipoTelefone;
 	}
+	
+	public Telefone() {
+		super();
+	}
 
 	public String getDdd() {
 		return ddd;

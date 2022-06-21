@@ -10,6 +10,10 @@ public class Cnae extends EntidadeDominio {
 		this.numero = numero;
 		this.dtCadastro = new Date();
 	}
+	
+	public Cnae() {
+		super();
+	}
 
 	public String getNumero() {
 		return numero;

@@ -10,6 +10,10 @@ public class Ramal extends Telefone {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
+	
+	public Ramal() {
+		super();
+	}
 
 	public String getCodigo() {
 		return codigo;

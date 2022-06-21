@@ -12,6 +12,10 @@ public class Usuario extends EntidadeDominio {
 		this.senha = senha;
 		this.pessoa = pessoa;
 	}
+	
+	public Usuario() {
+		super();
+	}
 
 	public String getLogin() {
 		return login;

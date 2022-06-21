@@ -11,6 +11,10 @@ public class Produto extends EntidadeDominio {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
+	
+	public Produto() {
+		super();
+	}
 
 	public int getId() {
 		return id;

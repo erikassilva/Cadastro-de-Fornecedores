@@ -10,6 +10,10 @@ public class Servico extends EntidadeDominio {
 		super();
 		this.descricao = descricao;
 	}
+		
+	public Servico() {
+		super();
+	}
 
 	public int getId() {
 		return id;

@@ -10,6 +10,10 @@ public class Cidade {
 		this.descricao = descricao;
 		this.uf = uf;
 	}
+	
+	public Cidade() {
+		super();
+	}
 
 	public String getDescricao() {
 		return descricao;

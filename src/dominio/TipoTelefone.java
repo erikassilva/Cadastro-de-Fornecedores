@@ -8,6 +8,10 @@ public class TipoTelefone {
 		super();
 		this.descricao = descricao;
 	}
+	
+	public TipoTelefone() {
+		super();
+	}
 
 	public String getDescricao() {
 		return descricao;

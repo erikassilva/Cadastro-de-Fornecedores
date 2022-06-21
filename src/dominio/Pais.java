@@ -11,6 +11,11 @@ public class Pais {
 		super();
 		this.descricao = descricao;
 	}
+	
+	
+	public Pais() {
+		super();
+	}
 
 	public String getDescricao() {
 		return descricao;

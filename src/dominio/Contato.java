@@ -13,6 +13,10 @@ public class Contato extends Pessoa {
 		this.email = email;
 		this.departamento = departamento;
 	}
+	
+	public Contato() {
+		super();
+	}
 
 	public String getEmail() {
 		return email;

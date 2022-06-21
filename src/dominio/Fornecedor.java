@@ -39,7 +39,11 @@ public class Fornecedor extends EntidadeDominio {
 		this.tipoFornecimento = tipoFornecimento;
 		this.endereco = endereco;
 	}
-	
+		
+	public Fornecedor() {
+		super();
+	}
+
 	public boolean isRascunho() {
 		return isRascunho;
 	}

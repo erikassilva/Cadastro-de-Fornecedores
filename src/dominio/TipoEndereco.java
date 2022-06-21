@@ -10,6 +10,10 @@ public class TipoEndereco {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
+	
+	public TipoEndereco() {
+		super();
+	}
 
 	public String getNome() {
 		return nome;

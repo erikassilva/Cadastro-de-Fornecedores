@@ -54,6 +54,17 @@ public class Fachada implements IFachada {
 		rnsFornecedor.add(vTelefone);
 		rnsFornecedor.add(vUnicidadeCnpj);
 		
+		List<IStrategy> rnsAlterarFornecedor = new ArrayList<IStrategy>();
+		rnsAlterarFornecedor.add(vCnae);
+		rnsAlterarFornecedor.add(vCnpj);
+		rnsAlterarFornecedor.add(vContaBancaria);
+		rnsAlterarFornecedor.add(vContato);
+		rnsAlterarFornecedor.add(vDadosFornecedor);
+		rnsAlterarFornecedor.add(vEndereco);
+		rnsAlterarFornecedor.add(vFornecimento);
+		rnsAlterarFornecedor.add(vTelefone);
+		rnsAlterarFornecedor.add(vUnicidadeCnpj);
+		
 		rns.put(nmFornecedor, rnsFornecedor);
 		
 	}

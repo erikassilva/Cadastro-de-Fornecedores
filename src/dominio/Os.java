@@ -12,6 +12,10 @@ public class Os extends EntidadeDominio {
 		super();
 		this.dtInicio = dtInicio;
 	}
+	
+	public Os() {
+		super();
+	}
 
 	public long getDtInicio() {
 		return dtInicio;

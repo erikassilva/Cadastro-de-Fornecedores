@@ -12,6 +12,10 @@ public class ContaBancaria extends EntidadeDominio {
 		this.agencia = agencia;
 		this.conta = conta;
 	}
+	
+	public ContaBancaria() {
+		super();
+	}
 
 	public String getBanco() {
 		return banco;

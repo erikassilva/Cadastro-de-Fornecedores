@@ -12,6 +12,10 @@ public class Empresa extends EntidadeDominio {
 		this.fornecedores = fornecedores;
 		this.tipoEmpresa = tipoEmpresa;
 	}
+	
+	public Empresa() {
+		super();
+	}
 
 	public List<Fornecedor> getFornecedores() {
 		return fornecedores;

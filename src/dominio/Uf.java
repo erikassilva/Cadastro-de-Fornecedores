@@ -15,6 +15,10 @@ public class Uf {
 		this.sigla = sigla;
 		this.pais = pais;
 	}
+	
+	public Uf() {
+		super();
+	}
 
 	public String getDescricao() {
 		return descricao;

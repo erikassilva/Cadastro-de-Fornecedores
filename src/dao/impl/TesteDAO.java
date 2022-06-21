@@ -49,7 +49,7 @@ public class TesteDAO {
 				
 		Cnae cna1 = new Cnae("123");
 		cna1.setDtCadastro(new Date());
-		
+				
 		Pessoa pes1 = new Pessoa("erika");
 		Departamento dep1 = new Departamento("finance");
 		Contato con1 = new Contato("erika", "@eeeai", dep1);
@@ -88,11 +88,17 @@ public class TesteDAO {
         erika.setTelefones(listaTelefones);
         erika.setOrdemServicos(listaOrdens);
         erika.setContasBancarias(listaContasBancarias);
-        //command.executar(erika);
 		
-		IDAO daoEnd = new FornecedorDAO();
-						
+		IDAO daoEnd = new FornecedorDAO();				
 		daoEnd.salvar(erika);
+		
+		Pais p2 = new Pais("USA");
+		Uf MG = new Uf ("MG", "MG", p2);
+		Cidade NaoPega = new Cidade("NaoRoda", MG);
+		TipoLogradouro t2 = new TipoLogradouro("Av", "SemFim");
+		TipoEndereco te1 = new TipoEndereco("Ta", " Valendo");
+		Endereco endereco1 = new Endereco("Fatec", "1547", "ESIII", "Ferias", NaoPega, t2, te1);
+		erika.setId(2);
 		
 	}
 

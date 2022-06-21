@@ -22,6 +22,12 @@ public class Endereco extends EntidadeDominio {
 		this.tipoLogradouro = tipoLogradouro;
 		this.tipoEndereco = tipoEndereco;
 	}
+		
+	public Endereco() {
+		super();
+	}
+
+
 
 	public String getCep() {
 		return cep;

@@ -23,7 +23,10 @@ import dominio.Telefone;
 
 public class FornecedorDAO implements IDAO {
 
+	private boolean ctrlTransaction = true;
 	private Connection connection = null;
+	private String table;
+	private String idTable;
 	
 	public void salvar(EntidadeDominio entidade) {
 		
@@ -243,9 +246,7 @@ public class FornecedorDAO implements IDAO {
 			if (rs.next())
 				idSer = rs.getInt(1);
 			s.setId(idSer);
-
 		}
-
 	}
 
 	private void salvarOSs(Fornecedor fornecedor) throws SQLException {
@@ -273,9 +274,7 @@ public class FornecedorDAO implements IDAO {
 			if (rs.next())
 				idOs = rs.getInt(1);
 			o.setId(idOs);
-
 		}
-
 	}
 
 	private void salvarContatos(Fornecedor fornecedor) throws SQLException {
@@ -305,23 +304,221 @@ public class FornecedorDAO implements IDAO {
 			if (rs.next())
 				idCont = rs.getInt(1);
 			c.setId(idCont);
-
 		}
-
 	}
-
-	
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+	
+		PreparedStatement pst = null;
+		Fornecedor fornecedor = (Fornecedor)entidade;
 		
+				
+		try {
+			connection = Conexao.getConnectionPostgres();
+			connection.setAutoCommit(false);
+			
+			EnderecoDAO enderecoDAO = new EnderecoDAO(connection);
+			enderecoDAO.salvar(fornecedor.getEndereco());
+						
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE tb_fornecedor SET email=?, cnpj=?, inscricao_estadual=?, inscricao_municipal=?, razao_social=?, nome_fantasia=?, status=?, tipo_fornecimento=?, ");
+			sql.append("end_id=?,");
+			sql.append("WHERE for_id=?;");
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+			
+			pst.setString(1, fornecedor.getEmail());
+			pst.setString(2, fornecedor.getCnpj());
+			pst.setString(3, fornecedor.getInscricaoEstadual());
+			pst.setString(4, fornecedor.getInscricaoMunicipal());
+			pst.setString(5, fornecedor.getRzSocial());
+			pst.setString(6, fornecedor.getNmFantasia());
+			pst.setString(7, fornecedor.getStatus());
+			pst.setString(8, fornecedor.getTipoFornecimento());
+			pst.setInt(9, fornecedor.getEndereco().getId());
+			pst.setInt(10, fornecedor.getId());
+			
+			pst.executeUpdate();
+			
+			salvarOSs(fornecedor);
+			salvarServicos(fornecedor);
+			salvarProdutos(fornecedor);
+			salvarContas(fornecedor);
+			salvarTelefones(fornecedor);
+			salvarCnaes(fornecedor);
+			salvarContatos(fornecedor);
+			
+			connection.commit();
+		}catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void alterarCnaes(Fornecedor fornecedor) throws SQLException {
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_cnae SET numero, ");
+		sql.append("WHERE for_id=?;");
+
+		for (Cnae cn : fornecedor.getCnaes()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setString(1, cn.getNumero());
+			
+			pst.executeUpdate();
+
+		}
+	}
+
+	private void alterarTelefones(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_telefone SET ddd, ddi, ");
+		sql.append("numero, tipo_telefone) ");
+		sql.append("WHERE for_id=?;");	
+	
+		for (Telefone t : fornecedor.getTelefones()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setString(1, t.getDdd());
+			pst.setString(2, t.getDdi());
+			pst.setString(3, t.getNumero());
+			pst.setString(4, t.getTipoTelefone().getDescricao());
+				
+			pst.executeUpdate();
+		}
+	}
+
+
+	private void alterarContas(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_contas SET banco, agencia, ");
+		sql.append("conta) ");
+		sql.append("WHERE for_id=?;");	
+	
+		for (ContaBancaria cb : fornecedor.getContasBancarias()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setString(1, cb.getBanco());
+			pst.setString(2, cb.getAgencia());
+			pst.setString(3, cb.getConta());
+				
+			pst.executeUpdate();
+		}
+	}
+
+	private void alterarProdutos(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_produto SET nome, descricao, ");
+		sql.append("WHERE for_id=?;");
+		
+		for (Produto prod : fornecedor.getProdutos()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setString(1, prod.getNome());
+			pst.setString(2, prod.getDescricao());
+			
+			pst.executeUpdate();		
+
+		}
+	}
+
+	private void alterarServicos(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_servico SET descricao, ");
+		sql.append("WHERE for_id=?;");
+		
+		for (Servico s : fornecedor.getServicos()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+			
+			pst.setString(1, s.getDescricao());				
+			
+			pst.executeUpdate();		
+		}
+	}
+
+	private void alterarOSs(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_os(dt_inicio, os_for_id, ");
+		sql.append("WHERE for_id=? AND os_for_id=?;");
+
+		for (Os o : fornecedor.getOrdemServicos()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setLong(1, o.getDtInicio());
+			pst.setInt(2, fornecedor.getId());
+			
+			pst.executeUpdate();
+
+		}
+	}
+
+	private void alterarContatos(Fornecedor fornecedor) throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE tb_contato SET email, departamento, ");
+		sql.append("WHERE for_id=?;");
+		
+		for (Contato c : fornecedor.getContatos()) {
+			
+			pst = connection.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
+			pst.setString(1, c.getEmail());
+			pst.setString(2, c.getDepartamento().getDescricao());			
+			
+			pst.executeUpdate();
+		}
 	}
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
 		
+			
 	}
 
 	@Override
